@@ -11,7 +11,7 @@
   }
 
 
-    var image = document.querySelector('#image'); 
+    var image = document.querySelector('#js-crop-image'); 
     var previews = document.querySelectorAll('.preview');
     var AspectRatio = 1;
     var cropper = new Cropper(image, {
@@ -75,24 +75,30 @@
     });
   
   function crop() {
-    console.log(cropper);
-    cropper.getCroppedCanvas().toBlob(function (blob) {
-     var formData = new FormData();
-   
-     formData.append('croppedImage', blob);
-   
-     // Use `jQuery.ajax` method
-     $.ajax('/path/to/upload', {
-       method: "POST",
-       data: formData,
-       processData: false,
-       contentType: false,
-       success: function () {
-         alert('Upload success');
-       },
-       error: function () {
-         alert('Upload error');
-       }
-     });
-   });
+    var cropBox = cropper.cropBox;
+    var transform= cropBox.style.transform;
+    var transformCropBox = cropBox.style.transform.replace(/[^0-9, '.']/g,'');
+    var transformArray = transformCropBox.split(' ');
+    var offsetX = +transformArray[0] || 0;
+    var offsetY = +transformArray[1] || 0;
+    var cropWidth = parseFloat(cropBox.style.width);
+    var cropHeight = parseFloat(cropBox.style.height);
+    var imageWidth = document.querySelector('.cropper-container').offsetWidth;
+    var imageHeight = document.querySelector('.cropper-container').offsetHeight;
+
+    if ( !(transform.indexOf('translateX(') + 1 ) ) {
+      offsetX = 0;
+      offsetY = +transformArray[0] || 0;
+    }
+
+    var obj = {
+      'imageWidth': imageWidth,
+      'imageHeight': imageHeight,
+      'startCropX': offsetX,
+      'startCropY': offsetY,
+      'cropWidth': cropWidth,
+      'cropHeight': cropHeight
+    };
+
+    $.post('test.php', obj);    
  }

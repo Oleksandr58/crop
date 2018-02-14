@@ -9,18 +9,20 @@
   <link rel="stylesheet" href="image.css">
 </head>
 <body>
-
-  <div class="container">
-    <div class="row">
-      <div class="">
-        <img id="image" src="picture.jpg" alt="Picture">
-      </div>
-      <div class="col col-2">
-        <div class="preview"></div>
+  <div class="wrap-crop">
+    <div class="container-crop">
+      <div class="row-crop">
+          <img id="js-crop-image" src="1.jpg" alt="Picture">
+        </div>
     </div>
-  </div>
-  <button onclick="crop()">Crop</button>
 
+    <div class="preview-crop">
+      <div class="preview"></div>
+      <button class="btn-crop" onclick="crop()">Crop</button>
+  </div>
+</div>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="cropper.min.js"></script>
   <script src="image.js"></script>
 </body>
