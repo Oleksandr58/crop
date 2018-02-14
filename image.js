@@ -56,21 +56,6 @@
           previewImage.style.marginLeft = -data.x / imageScaledRatio + 'px';
           previewImage.style.marginTop = -data.y / imageScaledRatio + 'px';
         });
-      },
-      cropmove: function () {
-        var cropper = this.cropper;
-        var cropBoxData = cropper.getCropBoxData();
-        var aspectRatio = cropBoxData.width / cropBoxData.height;
-
-        if (aspectRatio < minAspectRatio) {
-          cropper.setCropBoxData({
-            width: cropBoxData.height * minAspectRatio
-          });
-        } else if (aspectRatio > maxAspectRatio) {
-          cropper.setCropBoxData({
-            width: cropBoxData.height * maxAspectRatio
-          });
-        }
       }
     });
   
